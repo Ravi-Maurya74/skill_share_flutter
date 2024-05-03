@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "776543053568",
+    "project_id": "skill-share-67a40",
+    "storage_bucket": "skill-share-67a40.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:776543053568:android:6129e816652bfd3a8bf5e5",
+        "android_client_info": {
+          "package_name": "com.example.skill_share"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "776543053568-511mv6kslcb32dhdiser0m2f4achnrpv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.skill_share",
+            "certificate_hash": "c9602fa38010d66d30ef9095464202442eccdc23"
+          }
+        },
+        {
+          "client_id": "776543053568-dan0bdfmj00t8pj14n3ondeftsvtn13j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAb2QkYkzHBe6pMbmwC364x2_i-Ec9CsLI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "776543053568-dan0bdfmj00t8pj14n3ondeftsvtn13j.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "776543053568-rllgj66css26iafnk7hllqgbcde700v3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.skillShare"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
