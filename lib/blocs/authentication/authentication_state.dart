@@ -3,18 +3,14 @@ part of 'authentication_bloc.dart';
 @immutable
 sealed class AuthenticationState extends Equatable {}
 
-final class Uninitialized extends AuthenticationState {
-  @override
-  List<Object> get props => [];
-}
-
 final class Unauthenticated extends AuthenticationState {
   @override
   List<Object> get props => [];
 }
 
+// signed in from firebase and django
 final class Authenticated extends AuthenticationState {
-  final User user;
+  final MyUser.User user;
 
   Authenticated(this.user);
 
