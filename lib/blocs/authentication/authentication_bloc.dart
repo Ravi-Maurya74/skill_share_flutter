@@ -10,16 +10,19 @@ part 'authentication_state.dart';
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
   AuthenticationBloc({required this.userService}) : super(Unauthenticated()) {
-    on<AppStarted>(_onAppStarted);
+    on<LogIn>(_onLogIn);
     on<LogOut>(_onLogOut);
   }
   final UserService userService;
 
-  void _onAppStarted(
-      AppStarted event, Emitter<AuthenticationState> emit) async {
+  void _onLogIn(LogIn event, Emitter<AuthenticationState> emit) async {
     emit(AuthenticationLoading());
-    MyUser.User user = await userService.signIn();
-    emit(Authenticated(user));
+    try {
+      MyUser.User user = await userService.signIn();
+      emit(Authenticated(user));
+    } on Exception catch (e) {
+      emit(AuthenticationError(e.toString()));
+    }
   }
 
   void _onLogOut(LogOut event, Emitter<AuthenticationState> emit) async {

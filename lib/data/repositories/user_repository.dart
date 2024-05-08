@@ -20,8 +20,6 @@ class UserRepository {
     if (idToken == null) {
       throw Exception('Failed to get idToken');
     }
-    print("successfully acquired idToken: $idToken");
-    // Send idToken to Django server using dio
     Response response = await Dio().post(
       UserApiConstants.authenticate,
       options: Options(

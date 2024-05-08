@@ -4,7 +4,6 @@ import 'package:skill_share/blocs/authentication/authentication_bloc.dart';
 import 'package:skill_share/data/repositories/user_repository.dart';
 import 'package:skill_share/data/services/user_service.dart';
 import 'package:skill_share/presentation/screens/google_sign_in_wrapper.dart';
-import 'package:skill_share/presentation/screens/wrapper.dart';
 import 'firebase_options.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';

@@ -11,15 +11,16 @@ class GoogleSignInWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        initialData: FirebaseAuth.instance.currentUser,
-        builder: (context, snapshot) {
-          if (snapshot.data == null) {
-            return GoogleSignInPage();
-          } else {
-            context.read<AuthenticationBloc>().add(AppStarted());
-            return WrapperPage();
-          }
-        });
+      stream: FirebaseAuth.instance.authStateChanges(),
+      initialData: FirebaseAuth.instance.currentUser,
+      builder: (context, snapshot) {
+        if (snapshot.data == null) {
+          return GoogleSignInPage();
+        } else {
+          context.read<AuthenticationBloc>().add(LogIn());
+          return const WrapperPage();
+        }
+      },
+    );
   }
 }
