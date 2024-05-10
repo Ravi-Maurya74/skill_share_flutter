@@ -29,14 +29,25 @@ class GoogleSignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Google Sign-In with Firebase'),
-      ),
+      backgroundColor: const Color(0xFF121212),
       body: Center(
-        child: SignInButton(
-          Buttons.google,
-          text: "Sign in with Google",
-          onPressed: _handleSignIn,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 40),
+              child: const Image(
+                image: AssetImage(
+                  'images/Meeting1.png',
+                ),
+              ),
+            ),
+            SignInButton(
+              Buttons.google,
+              text: "Sign in with Google",
+              onPressed: _handleSignIn,
+            ),
+          ],
         ),
       ),
     );
