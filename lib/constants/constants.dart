@@ -1,8 +1,12 @@
 class ApiConstants {
   static const String baseUrl =
-      "https://b63a-2409-40d0-13-870b-2d42-29b1-14c7-45f7.ngrok-free.app/";
+      "https://e7a5-2401-4900-1c83-d4dc-3d97-e29d-ed1f-9aa9.ngrok-free.app/";
 }
 
 class UserApiConstants {
   static const String authenticate = "${ApiConstants.baseUrl}user/";
+}
+
+class ChatApiConstants {
+  static const String createChat = "${ApiConstants.baseUrl}chat/";
 }

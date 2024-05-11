@@ -5,6 +5,11 @@ import 'package:dio/dio.dart';
 
 import 'package:skill_share/constants/constants.dart';
 
+void printWrapped(String text) {
+  final pattern = new RegExp('.{1,800}'); // 800 is the size of each chunk
+  pattern.allMatches(text).forEach((match) => print(match.group(0)));
+}
+
 class UserRepository {
   Future<void> signOut() async {
     try {
@@ -20,6 +25,7 @@ class UserRepository {
     if (idToken == null) {
       throw Exception('Failed to get idToken');
     }
+    printWrapped("idToken: $idToken");
     Response response = await Dio().post(
       UserApiConstants.authenticate,
       options: Options(

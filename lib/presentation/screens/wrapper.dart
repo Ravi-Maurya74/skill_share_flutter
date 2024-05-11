@@ -13,9 +13,10 @@ class WrapperPage extends StatelessWidget {
       stream: context.read<AuthenticationBloc>().stream,
       initialData: context.read<AuthenticationBloc>().state,
       builder: (context, snapshot) {
-         if (snapshot.data is Authenticated) {
+        if (snapshot.data is Authenticated) {
           return const HomePage();
         } else if (snapshot.data is AuthenticationError) {
+          print((snapshot.data as AuthenticationError).message);
           return const Center(
             child: Text('An error occurred'),
           );
