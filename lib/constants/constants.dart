@@ -5,6 +5,7 @@ class ApiConstants {
 
 class UserApiConstants {
   static const String authenticate = "${ApiConstants.baseUrl}user/";
+  static const String searchUser = "${ApiConstants.baseUrl}user/search/";
 }
 
 class ChatApiConstants {

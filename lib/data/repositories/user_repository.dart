@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:skill_share/data/models/user.dart' as MyUser;
 import 'package:dio/dio.dart';
 
@@ -25,6 +26,8 @@ class UserRepository {
     if (idToken == null) {
       throw Exception('Failed to get idToken');
     }
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('idToken', idToken);
     printWrapped("idToken: $idToken");
     Response response = await Dio().post(
       UserApiConstants.authenticate,
