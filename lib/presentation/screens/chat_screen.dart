@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:skill_share/blocs/authentication/authentication_bloc.dart';
 import 'dart:async';
 
 import 'package:skill_share/data/models/chat.dart';
@@ -18,9 +19,6 @@ class ChatScreen extends StatefulWidget {
 class ChatScreenState extends State<ChatScreen> {
   final scrollController = ScrollController();
   final messageController = TextEditingController();
-  final _auth = FirebaseAuth.instance;
-  final _firestore = FirebaseFirestore.instance;
-  late User loggedInUser;
   late String textMessage;
   String prevMsg = 'noUser';
 
@@ -34,26 +32,18 @@ class ChatScreenState extends State<ChatScreen> {
     });
   }
 
-  void getCurrentUser() async {
-    try {
-      final user = _auth.currentUser;
-      if (user != null) {
-        loggedInUser = user;
-        print(loggedInUser.email);
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
-
   @override
   void initState() {
     super.initState();
-    getCurrentUser();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      scrollController.hasClients ? scrollToBottom() : null;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    String userEmail =
+        (context.read<AuthenticationBloc>().state as Authenticated).user.email;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -62,7 +52,7 @@ class ChatScreenState extends State<ChatScreen> {
           IconButton(
               icon: const Icon(Icons.close),
               onPressed: () {
-                _auth.signOut();
+                // _auth.signOut();
                 Navigator.pop(context);
               }),
         ],
@@ -85,7 +75,7 @@ class ChatScreenState extends State<ChatScreen> {
                 stream: ChatRepository.getMessages(chat: widget.chat),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    scrollToBottom();
+                    // scrollToBottom();
                     var documents = snapshot.data!.docs;
                     List<MessageBubble> MessageBubbles = [];
                     for (var doc in documents) {
@@ -94,7 +84,7 @@ class ChatScreenState extends State<ChatScreen> {
                       var messageBubble = MessageBubble(
                         sender: sender,
                         message: message,
-                        isMe: sender == loggedInUser.email,
+                        isMe: sender == userEmail,
                         sameLastSender: sender == prevMsg,
                       );
                       MessageBubbles.add(messageBubble);
@@ -159,7 +149,10 @@ class ChatScreenState extends State<ChatScreen> {
                             //   'sender': loggedInUser.email,
                             //   'timestamp': FieldValue.serverTimestamp(),
                             // });
-                            ChatRepository.addMessage(chat: widget.chat, message: textMessage);
+                            ChatRepository.addMessage(
+                                chat: widget.chat,
+                                message: textMessage,
+                                email: userEmail);
                             //Implement send functionality.
                           },
                           color: const Color(0xffDBE6FC),

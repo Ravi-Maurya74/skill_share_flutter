@@ -29,7 +29,7 @@ class UserRepository {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('idToken', idToken);
     printWrapped("idToken: $idToken");
-    await Future.delayed(Duration(seconds: 4));
+    // await Future.delayed(Duration(seconds: 4));
     Response response = await Dio().post(
       UserApiConstants.authenticate,
       options: Options(

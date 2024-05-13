@@ -16,17 +16,17 @@ class ChatRepository {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       String idToken = prefs.getString('idToken')!;
       Response response = await Dio().post(
-        ChatApiConstants.createChat,
+        ChatApiConstants.listCreateChat,
         data: {
           'type': type,
           'name': name,
           'participants': participants,
         },
         options: Options(
-        headers: {
-          'Authorization': 'Token $idToken',
-        },
-      ),
+          headers: {
+            'Authorization': 'Token $idToken',
+          },
+        ),
       );
       return Chat.fromMap(response.data);
     } on Exception catch (e) {
@@ -43,14 +43,15 @@ class ChatRepository {
         .orderBy('timestamp')
         .snapshots();
   }
-  static addMessage({required Chat chat, required String message}) async {
+
+  static addMessage({required Chat chat, required String message,required String email}) async {
     try {
       await FirebaseFirestore.instance
           .collection('chats')
           .doc(chat.document_id)
           .collection('messages')
           .add({
-        'sender': chat.participants[0],
+        'sender': email,
         'message': message,
         'timestamp': FieldValue.serverTimestamp(),
       });

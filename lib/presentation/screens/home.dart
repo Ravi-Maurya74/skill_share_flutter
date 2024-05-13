@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skill_share/constants/decoration.dart';
+import 'package:skill_share/presentation/tabs/dms_tab.dart';
 import 'package:skill_share/presentation/tabs/home_tab.dart';
 import 'package:skill_share/presentation/tabs/user_profile_tab.dart';
 
@@ -75,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.money_rounded),
-                  label: 'Dues',
+                  label: 'Dms',
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.person_rounded),
@@ -96,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
             const HomeTab(),
             Container(),
             Container(),
-            Container(),
+            const DmsTab(),
             const UserProfileTab(),
           ],
         ),

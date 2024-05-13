@@ -9,5 +9,5 @@ class UserApiConstants {
 }
 
 class ChatApiConstants {
-  static const String createChat = "${ApiConstants.baseUrl}chat/";
+  static const String listCreateChat = "${ApiConstants.baseUrl}chat/";
 }
