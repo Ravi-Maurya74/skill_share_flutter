@@ -16,10 +16,7 @@ class WrapperPage extends StatelessWidget {
       initialData: context.read<AuthenticationBloc>().state,
       builder: (context, snapshot) {
         if (snapshot.data is Authenticated) {
-          return BlocProvider<SearchUserBloc>(
-            create: (context) => SearchUserBloc(),
-            child: const SelectOtherUser(),
-          );
+          return const HomeScreen();
         } else if (snapshot.data is AuthenticationError) {
           print((snapshot.data as AuthenticationError).message);
           return const Center(

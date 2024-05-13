@@ -7,7 +7,7 @@ import 'package:dio/dio.dart';
 import 'package:skill_share/constants/constants.dart';
 
 void printWrapped(String text) {
-  final pattern = new RegExp('.{1,800}'); // 800 is the size of each chunk
+  final pattern = RegExp('.{1,800}'); // 800 is the size of each chunk
   pattern.allMatches(text).forEach((match) => print(match.group(0)));
 }
 
@@ -27,8 +27,9 @@ class UserRepository {
       throw Exception('Failed to get idToken');
     }
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('idToken', idToken);
+    await prefs.setString('idToken', idToken);
     printWrapped("idToken: $idToken");
+    await Future.delayed(Duration(seconds: 4));
     Response response = await Dio().post(
       UserApiConstants.authenticate,
       options: Options(

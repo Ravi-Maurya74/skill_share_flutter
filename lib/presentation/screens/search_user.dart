@@ -2,10 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skill_share/blocs/search_user/search_user_bloc.dart';
 import 'package:skill_share/constants/decoration.dart';
+import 'package:skill_share/data/models/chat.dart';
+import 'package:skill_share/data/models/user.dart';
+import 'package:skill_share/data/repositories/chat_repository.dart';
+import 'package:skill_share/presentation/screens/chat_screen.dart';
 import 'package:skill_share/presentation/widgets/user_profile_pic.dart';
 
 class SelectOtherUser extends StatelessWidget {
   const SelectOtherUser({super.key});
+
+  void _onSelectingUser(User user,BuildContext context)async{
+    Chat chat = await ChatRepository.createChat(type: "dm", participants: [user.uid]);
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => ChatScreen(chat: chat)));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +52,8 @@ class SelectOtherUser extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return ListTile(
                         onTap: () {
-                          Navigator.of(context).pop(state.users[index]);
+                          // Navigator.of(context).pop(state.users[index]);
+                          _onSelectingUser(state.users[index], context);
                         },
                         leading:
                             UserProfilePic(url: state.users[index].picture),

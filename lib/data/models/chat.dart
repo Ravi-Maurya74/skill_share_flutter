@@ -48,7 +48,7 @@ class Chat {
       type: map['type'] as String,
       name: map['name'] as String,
       last_message_time: map['last_message_time'] as String,
-      participants: List<String>.from((map['participants'] as List<String>),
+      participants: List<String>.from((map['participants'] as List<dynamic>),
     ));
   }
 
