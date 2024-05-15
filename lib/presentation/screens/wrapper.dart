@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skill_share/blocs/authentication/authentication_bloc.dart';
-import 'package:skill_share/blocs/search_user/search_user_bloc.dart';
 import 'package:skill_share/presentation/screens/home.dart';
 import 'package:skill_share/presentation/screens/login_loading.dart';
-import 'package:skill_share/presentation/screens/search_user.dart';
 
 class WrapperPage extends StatelessWidget {
   const WrapperPage({super.key});
