@@ -1,5 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:skill_share/blocs/authentication/authentication_bloc.dart';
 import 'package:skill_share/data/repositories/user_repository.dart';
 import 'package:skill_share/data/services/user_service.dart';
@@ -28,11 +30,29 @@ class MyApp extends StatelessWidget {
       create: (context) => AuthenticationBloc(
           userService: UserService(userRepository: UserRepository())),
       child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData.dark().copyWith(
+          scaffoldBackgroundColor: const Color(0xFF0f0f0f),
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Color(0xFF0f0f0f),
+            // shadowColor: Color(0xFF000000), // Change the AppBar color
+            // elevation: 10,
+          ),
+          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+            selectedItemColor: Color.fromARGB(255, 224, 215, 214),
+            unselectedItemColor: Color.fromARGB(255, 141, 141, 141),
+            backgroundColor: Color(0xFF0f0f0f),
+            elevation: 10,
+          ),
         ),
+        // colorScheme: ThemeData.dark().colorScheme.copyWith(
+        //       primary: Colors.deepPurple,
+        //       secondary: Colors.deepPurpleAccent,
+        //     ),
+        // theme: ThemeData(
+        //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        //   useMaterial3: true,
+        // ),
         home: const GoogleSignInWrapper(),
       ),
     );
