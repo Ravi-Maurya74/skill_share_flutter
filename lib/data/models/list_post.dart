@@ -6,7 +6,7 @@ class ListPost {
   final int id;
   final User user;
   final int score;
-  final int vote;
+  final int? vote; // Make vote nullable
   final String title;
   final String content;
   final String? image; // Make image nullable
@@ -17,7 +17,7 @@ class ListPost {
     required this.id,
     required this.user,
     required this.score,
-    required this.vote,
+    this.vote, // Update vote declaration
     required this.title,
     required this.content,
     this.image, // Update image declaration
@@ -57,7 +57,7 @@ class ListPost {
       'id': id,
       'user': user.toMap(),
       'score': score,
-      'vote': vote,
+      'vote': vote, // Update vote mapping
       'title': title,
       'content': content,
       'image': image, // Update image mapping
@@ -72,7 +72,7 @@ class ListPost {
       id: map['id'].toInt() as int,
       user: User.fromMap(map['user'] as Map<String,dynamic>),
       score: map['score'].toInt() as int,
-      vote: map['vote'].toInt() as int,
+      vote: map['vote'] as int?, // Update vote parsing
       title: map['title'] as String,
       content: map['content'] as String,
       image: map['image'] as String?, // Update image parsing
