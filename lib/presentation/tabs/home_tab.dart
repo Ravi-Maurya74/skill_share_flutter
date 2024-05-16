@@ -8,9 +8,16 @@ class HomeTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: ElevatedButton(onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => const VideoCallScreen()));
-        }, child: const Text("Stream")),
+        child: ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const VideoCallScreen(
+                            channelName: 'stream',
+                          )));
+            },
+            child: const Text("Stream")),
       ),
     );
   }

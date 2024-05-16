@@ -1,0 +1,12 @@
+Checking for wireless devices...
+
+Connected devices:
+SM M346B (mobile)           • 192.168.1.20:33055 • android-arm64  • Android 14 (API 34)
+sdk gphone64 arm64 (mobile) • emulator-5554      • android-arm64  • Android 14 (API 34) (emulator)
+macOS (desktop)             • macos              • darwin-arm64   • macOS 14.5 23F79 darwin-arm64
+Chrome (web)                • chrome             • web-javascript • Google Chrome 124.0.6367.209
+[1]: SM M346B (192.168.1.20:33055)
+[2]: sdk gphone64 arm64 (emulator-5554)
+[3]: macOS (macos)
+[4]: Chrome (chrome)
+Please choose one (or "q" to quit): q
