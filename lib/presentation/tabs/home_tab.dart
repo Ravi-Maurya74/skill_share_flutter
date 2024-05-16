@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:skill_share/presentation/screens/streaming.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:skill_share/blocs/list_post/list_post_bloc.dart';
 
 class HomeTab extends StatelessWidget {
   const HomeTab({super.key});
@@ -7,18 +8,31 @@ class HomeTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const VideoCallScreen(
-                            channelName: 'stream',
-                          )));
+        body: BlocBuilder(
+      bloc: ListPostBloc(),
+      builder: (context, state) {
+        if (state is ListPostLoading) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (state is ListPostLoaded) {
+          return ListView.builder(
+            itemCount: state.posts.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Text(state.posts[index].title),
+                subtitle: Text(state.posts[index].content),
+                onTap: () {
+                  // Navigator.of(context).push(MaterialPageRoute(
+                  //     builder: (context) =>
+                  //         StreamingScreen(post: state.posts[index])));
+                },
+              );
             },
-            child: const Text("Stream")),
-      ),
-    );
+          );
+        } else {
+          print((state as ListPostError).message);
+          return const Center(child: Text('An error occurred'));
+        }
+      },
+    ));
   }
 }

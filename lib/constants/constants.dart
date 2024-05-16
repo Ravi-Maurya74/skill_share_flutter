@@ -15,3 +15,7 @@ class ChatApiConstants {
 class CommunityApiConstants {
   static const String listCreateCommunity = "${ApiConstants.baseUrl}community/";
 }
+
+class PostApiConstants {
+  static const String listCreatePost = "${ApiConstants.baseUrl}post/";
+}
