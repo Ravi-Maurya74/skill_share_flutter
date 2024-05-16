@@ -11,7 +11,7 @@ class HomeTab extends StatelessWidget {
         body: BlocBuilder(
       bloc: ListPostBloc(),
       builder: (context, state) {
-        if (state is ListPostLoading) {
+        if (state is ListPostLoading || state is ListPostInitial) {
           return const Center(child: CircularProgressIndicator());
         } else if (state is ListPostLoaded) {
           return ListView.builder(

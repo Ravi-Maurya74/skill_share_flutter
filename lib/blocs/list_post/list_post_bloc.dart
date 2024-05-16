@@ -11,6 +11,7 @@ part 'list_post_state.dart';
 class ListPostBloc extends Bloc<ListPostEvent, ListPostState> {
   ListPostBloc() : super(ListPostInitial()) {
     on<FetchListPost>(_onFetchListPost);
+    add(const FetchListPost(null));
   }
   void _onFetchListPost(
       FetchListPost event, Emitter<ListPostState> emit) async {
@@ -26,8 +27,8 @@ class ListPostBloc extends Bloc<ListPostEvent, ListPostState> {
           },
         ),
         queryParameters: {
-          if (event.query != null)
-          'query': event.query,
+          // if (event.query != null)
+          // 'query': event.query,
         },
       );
       List<ListPost> posts = (response.data as List)

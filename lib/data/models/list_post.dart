@@ -9,7 +9,7 @@ class ListPost {
   final int vote;
   final String title;
   final String content;
-  final String image;
+  final String? image; // Make image nullable
   final String created_at;
   final String updated_at;
   final String community;
@@ -20,7 +20,7 @@ class ListPost {
     required this.vote,
     required this.title,
     required this.content,
-    required this.image,
+    this.image, // Update image declaration
     required this.created_at,
     required this.updated_at,
     required this.community,
@@ -60,7 +60,7 @@ class ListPost {
       'vote': vote,
       'title': title,
       'content': content,
-      'image': image,
+      'image': image, // Update image mapping
       'created_at': created_at,
       'updated_at': updated_at,
       'community': community,
@@ -75,7 +75,7 @@ class ListPost {
       vote: map['vote'].toInt() as int,
       title: map['title'] as String,
       content: map['content'] as String,
-      image: map['image'] as String,
+      image: map['image'] as String?, // Update image parsing
       created_at: map['created_at'] as String,
       updated_at: map['updated_at'] as String,
       community: map['community'] as String,
