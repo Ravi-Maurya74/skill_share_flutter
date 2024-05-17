@@ -35,14 +35,15 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: const Color(0xFF0f0f0f),
           appBarTheme: const AppBarTheme(
             backgroundColor: Color(0xFF0f0f0f),
-            // shadowColor: Color(0xFF000000), // Change the AppBar color
-            // elevation: 10,
           ),
           bottomNavigationBarTheme: const BottomNavigationBarThemeData(
             selectedItemColor: Color.fromARGB(255, 224, 215, 214),
             unselectedItemColor: Color.fromARGB(255, 141, 141, 141),
             backgroundColor: Color(0xFF0f0f0f),
             elevation: 10,
+          ),
+          progressIndicatorTheme: const ProgressIndicatorThemeData(
+            color: Color(0xFFfb542b),
           ),
         ),
         // colorScheme: ThemeData.dark().colorScheme.copyWith(

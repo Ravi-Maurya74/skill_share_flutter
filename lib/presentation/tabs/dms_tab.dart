@@ -18,14 +18,15 @@ class DmsTab extends StatelessWidget {
           transitionType: ContainerTransitionType.fadeThrough,
           closedShape: const CircleBorder(),
           // closedColor: const Color(0xFF50559a),
-          closedColor: const Color(0xFFFF4500), //#FF4500
+          closedColor: const Color(0xFFfb542b), //Color(0xFFFF4500),
+          //Color(0xFFFF5B00) //#FF4500
           openColor: Theme.of(context)
               .scaffoldBackgroundColor, //const Color(0xFF16161e),
           middleColor: const Color(0xFFd988a1),
           closedBuilder: (context, action) => Container(
                 margin: const EdgeInsets.all(16),
                 decoration: const BoxDecoration(
-                  color: Color(0xFFFF4500),
+                  color: Color(0xFFfb542b),
                 ),
                 child: const Icon(
                   Icons.add,
@@ -43,7 +44,8 @@ class DmsTab extends StatelessWidget {
               return const Center(child: CircularProgressIndicator());
             } else if (state is AllDmsLoaded) {
               return Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -85,7 +87,7 @@ class DmsTab extends StatelessWidget {
                               width: 10.0,
                               height: 10.0,
                               decoration: const BoxDecoration(
-                                color: Color(0xFFFF4500),
+                                color: Color(0xFFfb542b),
                                 shape: BoxShape.circle,
                               ),
                             ),
