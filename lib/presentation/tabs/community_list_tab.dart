@@ -15,7 +15,7 @@ class CommunityListTab extends StatelessWidget {
       body: BlocBuilder<CommunityListBloc, CommunityListState>(
           bloc: CommunityListBloc(),
           builder: (context, state) {
-            if (state is CommunityListLoading) {
+            if (state is CommunityListLoading || state is CommunityListInitial) {
               return const Center(child: CircularProgressIndicator());
             } else if (state is CommunityListLoaded) {
               return Padding(
@@ -53,7 +53,7 @@ class CommunityListTab extends StatelessWidget {
                 ),
               );
             } else {
-              // print((state as AllDmsError).message);
+              print((state as CommunityListError).message);
               return const Center(child: Text('An error occurred'));
             }
           }),
@@ -88,7 +88,7 @@ class CommunityCard extends StatelessWidget {
               .copyWith(color: Colors.white), //what if there are many skills
         ),
         subtitle:
-            Text('${community.skill} • ${community.members.length} members'),
+            Text('${community.skill.name} • ${community.members.length} members'),
         trailing: community.is_member ? null : const JoinButton(),
         onTap: () {
           Navigator.push(
