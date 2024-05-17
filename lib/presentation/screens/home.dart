@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
           title: Text(
             'Skill Share',
             style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                  color: const Color.fromARGB(255, 224, 215, 214),
+                  color: Colors.white,
                   fontSize: 19,
                 ),
           ),
@@ -69,23 +69,23 @@ class _HomeScreenState extends State<HomeScreen> {
                   fontSize: 11, fontWeight: FontWeight.normal),
               items: const [
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
+                  icon: Icon(Icons.home_outlined),
                   label: 'Home',
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.people_rounded),
+                  icon: Icon(Icons.public_rounded),
                   label: 'Community',
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.bar_chart_rounded),
-                  label: 'Insights',
+                  icon: Icon(Icons.star_outline_rounded),
+                  label: 'Showcase',
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.money_rounded),
-                  label: 'Dms',
+                  icon: Icon(Icons.textsms_outlined),
+                  label: 'Chat',
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.person_rounded),
+                  icon: Icon(Icons.person_outline_rounded),
                   label: 'Profile',
                 ),
               ],
@@ -101,8 +101,8 @@ class _HomeScreenState extends State<HomeScreen> {
           index: selectedIndex,
           children: [
             const HomeTab(),
-            Container(),
             const CommunityListTab(),
+            Container(),
             const DmsTab(),
             const UserProfileTab(),
           ],
