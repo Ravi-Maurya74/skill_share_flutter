@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skill_share/blocs/community_list/community_list_bloc.dart';
 import 'package:skill_share/constants/decoration.dart';
+import 'package:skill_share/data/models/community.dart';
+import 'package:skill_share/presentation/screens/community_specific_screen.dart';
 import 'package:skill_share/presentation/widgets/join_button.dart';
 
 class CommunityListTab extends StatelessWidget {
@@ -42,11 +44,7 @@ class CommunityListTab extends StatelessWidget {
                         itemCount: state.communities.length,
                         itemBuilder: (context, index) {
                           return CommunityCard(
-                            name: state.communities[index].name,
-                            skill: state.communities[index].skill.name,
-                            members: state.communities[index].members.length
-                                .toString(),
-                            isMember: state.communities[index].is_member,
+                            community: state.communities[index],
                           );
                         },
                       ),
@@ -64,14 +62,8 @@ class CommunityListTab extends StatelessWidget {
 }
 
 class CommunityCard extends StatelessWidget {
-  final String name, skill, members;
-  final bool isMember;
-  const CommunityCard(
-      {required this.name,
-      required this.skill,
-      required this.members,
-      required this.isMember,
-      super.key});
+  final Community community;
+  const CommunityCard({required this.community, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -89,18 +81,22 @@ class CommunityCard extends StatelessWidget {
           backgroundImage: AssetImage('images/Meeting2.png'),
         ),
         title: Text(
-          name,
+          community.name,
           style: Theme.of(context)
               .textTheme
               .titleMedium!
               .copyWith(color: Colors.white), //what if there are many skills
         ),
-        subtitle: Text('$skill • ${members.length} members'),
-        trailing: isMember ? null : const JoinButton(),
+        subtitle:
+            Text('${community.skill} • ${community.members.length} members'),
+        trailing: community.is_member ? null : const JoinButton(),
         onTap: () {
-          // Navigator.of(context).push(MaterialPageRoute(
-          //     builder: (context) =>
-          //         ChatScreen(chat: state.dms[index])));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => CommunitySpecificScreen(
+                        community: community,
+                      )));
         },
       ),
     );

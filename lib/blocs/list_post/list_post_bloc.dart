@@ -9,10 +9,11 @@ part 'list_post_event.dart';
 part 'list_post_state.dart';
 
 class ListPostBloc extends Bloc<ListPostEvent, ListPostState> {
-  ListPostBloc() : super(ListPostInitial()) {
+  ListPostBloc(this.query) : super(ListPostInitial()) {
     on<FetchListPost>(_onFetchListPost);
-    add(const FetchListPost(null));
+    add(FetchListPost(query));
   }
+  final String? query;
   void _onFetchListPost(
       FetchListPost event, Emitter<ListPostState> emit) async {
     emit(ListPostLoading());
@@ -20,15 +21,15 @@ class ListPostBloc extends Bloc<ListPostEvent, ListPostState> {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       String idToken = prefs.getString('idToken')!;
       Response response = await Dio().get(
-        PostApiConstants.listCreatePost,
+        query == null ? PostApiConstants.listCreatePost : "${PostApiConstants.listCreatePost}community/",
         options: Options(
           headers: {
             'Authorization': 'Token $idToken',
           },
         ),
         queryParameters: {
-          // if (event.query != null)
-          // 'query': event.query,
+          if (event.query != null)
+          'community_pk': event.query,
         },
       );
       List<ListPost> posts = (response.data as List)
