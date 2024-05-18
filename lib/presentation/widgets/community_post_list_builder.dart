@@ -4,11 +4,10 @@ import 'package:skill_share/blocs/list_post/list_post_bloc.dart';
 import 'package:skill_share/presentation/widgets/join_button.dart';
 
 class CommunityPostListBuilder extends StatelessWidget {
-  const CommunityPostListBuilder({
-    super.key,
-    this.query,
-  });
+  const CommunityPostListBuilder(
+      {super.key, this.query, this.showJoinedButton = false});
   final String? query;
+  final bool showJoinedButton;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +22,8 @@ class CommunityPostListBuilder extends StatelessWidget {
             itemBuilder: (context, index) {
               return Container(
                 margin: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-                padding: const EdgeInsets.symmetric(horizontal: 8),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                 decoration: BoxDecoration(
                   border: Border.all(
                     color: const Color(0xFF272727),
@@ -44,7 +44,7 @@ class CommunityPostListBuilder extends StatelessWidget {
                       ),
                       title: Text(state.posts[index].user.name),
                       subtitle: Text(state.posts[index].user.email),
-                      trailing: const JoinButton(),
+                      trailing: showJoinedButton ? const JoinButton() : null,
                       onTap: () {
                         // Navigator.of(context).push(MaterialPageRoute(
                         //     builder: (context) =>
