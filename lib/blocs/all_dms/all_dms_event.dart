@@ -8,3 +8,6 @@ sealed class AllDmsEvent extends Equatable {
 }
 
 final class FetchAllDms extends AllDmsEvent {}
+
+final class FetchUpdateAllDms extends AllDmsEvent {
+}

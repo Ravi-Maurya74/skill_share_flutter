@@ -44,8 +44,34 @@ class ChatRepository {
         .snapshots();
   }
 
-  static addMessage({required Chat chat, required String message,required String email}) async {
+  static Future<Chat> update_last_message_time({required Chat chat}) async {
     try {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      String idToken = prefs.getString('idToken')!;
+      Response response = await Dio().patch(
+        ChatApiConstants.listCreateChat,
+        data: {
+          'document_id': chat.document_id,
+        },
+        options: Options(
+          headers: {
+            'Authorization': 'Token $idToken',
+          },
+        ),
+      );
+      return Chat.fromMap(response.data);
+    } on Exception catch (e) {
+      debugPrint('Failed to update last message time: $e');
+      rethrow;
+    }
+  }
+
+  static addMessage(
+      {required Chat chat,
+      required String message,
+      required String email}) async {
+    try {
+      update_last_message_time(chat: chat);
       await FirebaseFirestore.instance
           .collection('chats')
           .doc(chat.document_id)
