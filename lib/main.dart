@@ -35,6 +35,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: const Color(0xFF0f0f0f),
           appBarTheme: const AppBarTheme(
             backgroundColor: Color(0xFF0f0f0f),
+            scrolledUnderElevation: 0,
           ),
           bottomNavigationBarTheme: const BottomNavigationBarThemeData(
             selectedItemColor: Color.fromARGB(255, 224, 215, 214),

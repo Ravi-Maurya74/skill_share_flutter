@@ -21,15 +21,16 @@ class ListPostBloc extends Bloc<ListPostEvent, ListPostState> {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       String idToken = prefs.getString('idToken')!;
       Response response = await Dio().get(
-        query == null ? PostApiConstants.listCreatePost : "${PostApiConstants.listCreatePost}community/",
+        query == null
+            ? PostApiConstants.listCreatePost
+            : "${PostApiConstants.listCreatePost}community/",
         options: Options(
           headers: {
             'Authorization': 'Token $idToken',
           },
         ),
         queryParameters: {
-          if (event.query != null)
-          'community_pk': event.query,
+          if (event.query != null) 'community_pk': event.query,
         },
       );
       List<ListPost> posts = (response.data as List)
