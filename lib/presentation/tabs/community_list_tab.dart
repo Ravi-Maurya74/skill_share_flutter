@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skill_share/blocs/community_list/community_list_bloc.dart';
 import 'package:skill_share/constants/decoration.dart';
+import 'package:skill_share/presentation/screens/create_community.dart';
 import 'package:skill_share/presentation/widgets/community_card.dart';
+import 'package:animations/animations.dart';
 
 class CommunityListTab extends StatelessWidget {
   const CommunityListTab({super.key});
@@ -10,6 +12,29 @@ class CommunityListTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: OpenContainer(
+        transitionDuration: const Duration(milliseconds: 500),
+        transitionType: ContainerTransitionType.fadeThrough,
+        closedShape: const CircleBorder(),
+        // closedColor: const Color(0xFF50559a),
+        closedColor: const Color(0xFFfb542b), //Color(0xFFFF4500),
+        //Color(0xFFFF5B00) //#FF4500
+        openColor: Theme.of(context)
+            .scaffoldBackgroundColor, //const Color(0xFF16161e),
+        middleColor: const Color(0xFFd988a1),
+        closedBuilder: (context, action) => Container(
+          margin: const EdgeInsets.all(16),
+          decoration: const BoxDecoration(
+            color: Color(0xFFfb542b),
+          ),
+          child: const Icon(
+            Icons.add,
+            size: 25,
+            color: Color.fromARGB(255, 255, 255, 255),
+          ),
+        ),
+        openBuilder: (context, action) => const CreateCommunity(),
+      ),
       body: BlocBuilder<CommunityListBloc, CommunityListState>(
           bloc: CommunityListBloc(),
           builder: (context, state) {
