@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skill_share/blocs/list_post/list_post_bloc.dart';
@@ -43,7 +45,7 @@ class CommunityPostListBuilder extends StatelessWidget {
                             NetworkImage(state.posts[index].user.picture),
                       ),
                       title: Text(state.posts[index].user.name),
-                      subtitle: Text(state.posts[index].user.email),
+                      subtitle: Text(state.posts[index].community),
                       trailing: showJoinedButton ? const JoinButton() : null,
                       onTap: () {
                         // Navigator.of(context).push(MaterialPageRoute(
@@ -52,7 +54,7 @@ class CommunityPostListBuilder extends StatelessWidget {
                       },
                     ),
                     Text(
-                      state.posts[index].content,
+                      state.posts[index].title,
                       style: Theme.of(context)
                           .textTheme
                           .bodyLarge!
@@ -61,14 +63,20 @@ class CommunityPostListBuilder extends StatelessWidget {
                     const SizedBox(
                       height: 4,
                     ),
+                    if(state.posts[index].image != null)
                     ClipRRect(
                       borderRadius: BorderRadius.circular(16.0),
                       child: Image.network(
-                        state.posts[index].image ??
-                            'https://i.pinimg.com/736x/d0/4b/1f/d04b1f2ed3ca8ad4a302fbe9f4f5a875.jpg',
+                        state.posts[index].image!,
                         fit: BoxFit.fill,
+                        width: double.infinity,
                       ),
                     ),
+                    const SizedBox(
+                      height: 4,
+                    ),
+                    Text(
+                        '${state.posts[index].content.substring(0, min(100, state.posts[index].content.length))}...'),
                     Row(
                       children: [
                         IconButton(
