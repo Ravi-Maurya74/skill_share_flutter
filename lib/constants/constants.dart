@@ -19,3 +19,8 @@ class CommunityApiConstants {
 class PostApiConstants {
   static const String listCreatePost = "${ApiConstants.baseUrl}post/";
 }
+
+class SkillApiConstants {
+  static const String listCreateSkill =
+      "${CommunityApiConstants.listCreateCommunity}skills/";
+}

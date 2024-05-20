@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skill_share/blocs/community_list/community_list_bloc.dart';
+import 'package:skill_share/blocs/create_community/create_community_bloc.dart';
 import 'package:skill_share/constants/decoration.dart';
 import 'package:skill_share/presentation/screens/create_community.dart';
 import 'package:skill_share/presentation/widgets/community_card.dart';
@@ -33,7 +34,10 @@ class CommunityListTab extends StatelessWidget {
             color: Color.fromARGB(255, 255, 255, 255),
           ),
         ),
-        openBuilder: (context, action) => const CreateCommunity(),
+        openBuilder: (context, action) => BlocProvider<CreateCommunityBloc>(
+          create: (context) => CreateCommunityBloc(),
+          child: const CreateCommunity(),
+        ),
       ),
       body: BlocBuilder<CommunityListBloc, CommunityListState>(
           bloc: CommunityListBloc(),

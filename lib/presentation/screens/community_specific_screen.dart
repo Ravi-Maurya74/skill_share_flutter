@@ -47,7 +47,9 @@ class CommunitySpecificScreen extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: const Color(0xFF0f0f0f),
           leading: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pop(context);
+            },
             icon: CircleAvatar(
               backgroundColor: Colors.black.withOpacity(0.7),
               child: const Icon(
