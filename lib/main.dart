@@ -46,6 +46,9 @@ class MyApp extends StatelessWidget {
           progressIndicatorTheme: const ProgressIndicatorThemeData(
             color: Color(0xFFfb542b),
           ),
+          dialogTheme: const DialogTheme(
+            backgroundColor: Color(0xFF0f0f0f),
+          ),
         ),
         // colorScheme: ThemeData.dark().colorScheme.copyWith(
         //       primary: Colors.deepPurple,
