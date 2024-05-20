@@ -219,16 +219,16 @@ class _CreateCommunityState extends State<CreateCommunity> {
                           bool isValid = _formKey.currentState!.validate();
                           if (isValid) {
                             // Create the community
-                            Community community = Community(
-                              name: _titleController.text,
-                              skill: selectedSkill!,
-                              is_admin: true,
-                              is_member: true,
-                              members: [],
-                              banner: _bannerImage!.path,
-                              profile_image: _profileImage!.path,
-                              description: _contentController.text,
-                            );
+                            // Community community = Community(
+                            //   name: _titleController.text,
+                            //   skill: selectedSkill!,
+                            //   is_admin: true,
+                            //   is_member: true,
+                            //   members: [],
+                            //   banner: _bannerImage!.path,
+                            //   profile_image: _profileImage!.path,
+                            //   description: _contentController.text,
+                            // );
                             // Save the community to the database
                             // Navigator.pop(context);
                           } else {

@@ -1,5 +1,7 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:skill_share/blocs/create_post/create_post_bloc.dart';
 import 'package:skill_share/data/models/community.dart';
 import 'package:skill_share/presentation/screens/create_post.dart';
 import 'package:skill_share/presentation/widgets/community_card.dart';
@@ -35,7 +37,12 @@ class CommunitySpecificScreen extends StatelessWidget {
               color: Color.fromARGB(255, 255, 255, 255),
             ),
           ),
-          openBuilder: (context, action) => const CreatePost(),
+          openBuilder: (context, action) => BlocProvider<CreatePostBloc>(
+            create: (context) => CreatePostBloc(),
+            child: CreatePost(
+              communityName: community.name,
+            ),
+          ),
         ),
         appBar: AppBar(
           backgroundColor: const Color(0xFF0f0f0f),
