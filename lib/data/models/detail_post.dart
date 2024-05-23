@@ -9,10 +9,10 @@ class DetailPost {
   final int downvotes;
   final int score;
   final bool is_saved;
-  final int? vote;
+  final int? vote;  // maine kya kiya
   final String title;
   final String content;
-  final String image;
+  final String? image;
   final String created_at;
   final String updated_at;
   final String community;
@@ -26,7 +26,7 @@ class DetailPost {
     this.vote,
     required this.title,
     required this.content,
-    required this.image,
+    this.image,
     required this.created_at,
     required this.updated_at,
     required this.community,
@@ -93,7 +93,7 @@ class DetailPost {
       vote: map['vote'] as int?,
       title: map['title'] as String,
       content: map['content'] as String,
-      image: map['image'] as String,
+      image: map['image'] as String?,
       created_at: map['created_at'] as String,
       updated_at: map['updated_at'] as String,
       community: map['community'] as String,
