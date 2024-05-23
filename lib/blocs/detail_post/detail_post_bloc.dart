@@ -9,9 +9,11 @@ part 'detail_post_event.dart';
 part 'detail_post_state.dart';
 
 class DetailPostBloc extends Bloc<DetailPostEvent, DetailPostState> {
-  DetailPostBloc() : super(DetailPostInitial()) {
+  DetailPostBloc(this.id) : super(DetailPostInitial()) {
     on<FetchDetailPost>(_onFetchDetailPost);
+    add(FetchDetailPost(id));
   }
+  final String id;
   void _onFetchDetailPost(
       FetchDetailPost event, Emitter<DetailPostState> emit) async {
     emit(DetailPostLoading());
