@@ -12,7 +12,7 @@ class JoinButton extends StatelessWidget {
         // Add your logic here
       },
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
         decoration: BoxDecoration(
           color: const Color(0xFFfb542b),
           borderRadius: BorderRadius.circular(16.0),
