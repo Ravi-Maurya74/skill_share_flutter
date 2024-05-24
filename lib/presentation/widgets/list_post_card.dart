@@ -24,7 +24,7 @@ class ListPostCard extends StatelessWidget {
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => BlocProvider<DetailPostBloc>(
                   create: (context) => DetailPostBloc(post.id.toString()),
-                  child: const PostDetailScreen(),
+                  child: PostDetailScreen(showJoinedButton: showJoinedButton),
                 )));
       },
       child: Container(
@@ -47,7 +47,12 @@ class ListPostCard extends StatelessWidget {
               leading: CircleAvatar(
                 backgroundImage: NetworkImage(post.user.picture),
               ),
-              title: Text(post.user.name),
+              title: Row(
+                children: [
+                  Text('${post.user.name} '), //• ${post.created_at}
+                ],
+              ),
+              // Text(post.user.name),
               subtitle: Text(post.community),
               trailing: showJoinedButton ? const JoinButton() : null,
               // onTap: () {
@@ -84,9 +89,28 @@ class ListPostCard extends StatelessWidget {
                 '${post.content.substring(0, min(100, post.content.length))}...'),
             Row(
               children: [
-                IconButton(icon: const Icon(Icons.favorite), onPressed: () {}),
-                IconButton(icon: const Icon(Icons.comment), onPressed: () {}),
-                IconButton(icon: const Icon(Icons.share), onPressed: () {}),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(0, 6, 4, 6),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: const Color(0xFF272727),
+                      width: 1.5,
+                    ),
+                    borderRadius: BorderRadius.circular(22.0),
+                  ),
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.arrow_circle_up_rounded,
+                        size: 16,
+                        color: Color.fromARGB(255, 208, 207, 207),
+                      ),
+                      Text(' ${post.score.toString()} '),
+                    ],
+                  ),
+                ),
               ],
             ),
           ],
