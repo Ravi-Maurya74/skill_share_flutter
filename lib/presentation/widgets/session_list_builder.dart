@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skill_share/blocs/list_session/list_session_bloc.dart';
 import 'package:skill_share/data/models/community.dart';
 import 'package:skill_share/data/models/list_session.dart';
+import 'package:skill_share/presentation/screens/SessionScreen.dart';
 
 class SessionListBuilder extends StatelessWidget {
   const SessionListBuilder({super.key, required this.community});
@@ -39,6 +40,13 @@ class SingleListSessionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => SessionScreen(session: session),
+            ));
+      },
       title: Text(session.description),
       subtitle: Text(session.time),
     );
