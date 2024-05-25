@@ -5,7 +5,6 @@ import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:skill_share/constants/constants.dart';
-import 'package:skill_share/data/models/list_post.dart';
 
 part 'create_post_event.dart';
 part 'create_post_state.dart';

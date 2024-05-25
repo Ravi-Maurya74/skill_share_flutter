@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skill_share/blocs/detail_post/detail_post_bloc.dart';
 import 'package:skill_share/presentation/widgets/join_button.dart';

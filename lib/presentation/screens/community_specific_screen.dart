@@ -5,7 +5,6 @@ import 'package:skill_share/blocs/create_post/create_post_bloc.dart';
 import 'package:skill_share/constants/decoration.dart';
 import 'package:skill_share/data/models/community.dart';
 import 'package:skill_share/presentation/screens/create_post.dart';
-import 'package:skill_share/presentation/widgets/community_card.dart';
 import 'package:skill_share/presentation/widgets/community_post_list_builder.dart';
 import 'package:skill_share/presentation/widgets/join_button.dart';
 import 'package:skill_share/presentation/widgets/session_list_builder.dart';
@@ -162,15 +161,9 @@ class _CommunitySpecificScreenTabsState
               CommunityPostListBuilder(
                 query: widget.community.name,
               ),
-              SessionListBuilder(community: widget.community),
-              // CustomScrollView(
-              //   slivers: [
-              //     CommunityPostListBuilder(
-              //       query: widget.community.name,
-              //     ),
-              //     Container(),
-              //   ],
-              // ),
+              SessionListBuilder(
+                community: widget.community,
+              ),
             ],
           ),
         ),
