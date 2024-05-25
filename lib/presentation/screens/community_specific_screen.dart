@@ -8,6 +8,7 @@ import 'package:skill_share/presentation/screens/create_post.dart';
 import 'package:skill_share/presentation/widgets/community_card.dart';
 import 'package:skill_share/presentation/widgets/community_post_list_builder.dart';
 import 'package:skill_share/presentation/widgets/join_button.dart';
+import 'package:skill_share/presentation/widgets/session_list_builder.dart';
 
 class CommunitySpecificScreen extends StatelessWidget {
   const CommunitySpecificScreen({super.key, required this.community});
@@ -161,7 +162,7 @@ class _CommunitySpecificScreenTabsState
               CommunityPostListBuilder(
                 query: widget.community.name,
               ),
-              Container(),
+              SessionListBuilder(community: widget.community),
               // CustomScrollView(
               //   slivers: [
               //     CommunityPostListBuilder(
