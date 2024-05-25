@@ -10,7 +10,7 @@ class SessionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Sessions'),
+          title: const Text('Sessions'),
         ),
         body: Column(
           children: [
@@ -25,7 +25,7 @@ class SessionScreen extends StatelessWidget {
                             VideoCallScreen(channelName: session.channel_id),
                       ));
                 },
-                child: Text('Join Session'))
+                child: const Text('Join Session'))
           ],
         ));
   }
