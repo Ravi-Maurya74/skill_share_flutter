@@ -7,9 +7,15 @@ import 'package:skill_share/presentation/screens/create_community.dart';
 import 'package:skill_share/presentation/widgets/community_card.dart';
 import 'package:animations/animations.dart';
 
-class CommunityListTab extends StatelessWidget {
+class CommunityListTab extends StatefulWidget {
   const CommunityListTab({super.key});
 
+  @override
+  State<CommunityListTab> createState() => _CommunityListTabState();
+}
+
+class _CommunityListTabState extends State<CommunityListTab> {
+  Key key = UniqueKey();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +45,31 @@ class CommunityListTab extends StatelessWidget {
           child: const CreateCommunity(),
         ),
       ),
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {},
+          icon: const Icon(Icons.arrow_back),
+        ),
+        title: Text(
+          'Skill Share',
+          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                color: Colors.white,
+                fontSize: 19,
+              ),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              setState(() {
+                key = UniqueKey();
+              });
+            },
+            icon: const Icon(Icons.refresh),
+          ),
+        ],
+      ),
       body: BlocBuilder<CommunityListBloc, CommunityListState>(
+        key: key,
           bloc: CommunityListBloc(),
           builder: (context, state) {
             if (state is CommunityListLoading ||

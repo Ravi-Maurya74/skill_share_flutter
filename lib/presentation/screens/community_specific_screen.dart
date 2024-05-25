@@ -2,6 +2,7 @@ import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skill_share/blocs/create_post/create_post_bloc.dart';
+import 'package:skill_share/constants/decoration.dart';
 import 'package:skill_share/data/models/community.dart';
 import 'package:skill_share/presentation/screens/create_post.dart';
 import 'package:skill_share/presentation/widgets/community_card.dart';
@@ -100,10 +101,79 @@ class CommunitySpecificScreen extends StatelessWidget {
             ),
           ),
         ),
-        body: CommunityPostListBuilder(
-          query: community.name,
-        ),
+        body: CommunitySpecificScreenTabs(community: community),
       ),
+    );
+  }
+}
+
+class CommunitySpecificScreenTabs extends StatefulWidget {
+  const CommunitySpecificScreenTabs({super.key, required this.community});
+  final Community community;
+
+  @override
+  State<CommunitySpecificScreenTabs> createState() =>
+      _CommunitySpecificScreenTabsState();
+}
+
+class _CommunitySpecificScreenTabsState
+    extends State<CommunitySpecificScreenTabs>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    _tabController = TabController(length: 2, vsync: this);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        TabBar(
+          controller: _tabController,
+          tabs: [
+            Tab(
+              child: Text(
+                'Posts',
+                style: titleStyle.copyWith(fontSize: 20),
+              ),
+            ),
+            Tab(
+              child: Text(
+                'Sessions',
+                style: titleStyle.copyWith(fontSize: 20),
+              ),
+            ),
+          ],
+        ),
+        Expanded(
+          child: TabBarView(
+            controller: _tabController,
+            children: [
+              CommunityPostListBuilder(
+                query: widget.community.name,
+              ),
+              Container(),
+              // CustomScrollView(
+              //   slivers: [
+              //     CommunityPostListBuilder(
+              //       query: widget.community.name,
+              //     ),
+              //     Container(),
+              //   ],
+              // ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

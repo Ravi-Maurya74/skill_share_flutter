@@ -24,3 +24,7 @@ class SkillApiConstants {
   static const String listCreateSkill =
       "${CommunityApiConstants.listCreateCommunity}skills/";
 }
+
+class SessionApiConstants {
+  static const String listCreateSession = "${ApiConstants.baseUrl}/community/sessions/";
+}
