@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skill_share/blocs/authentication/authentication_bloc.dart';
+import 'package:skill_share/blocs/saved_posts/saved_posts_bloc.dart';
 import 'package:skill_share/data/models/user.dart';
+import 'package:skill_share/presentation/screens/saved_posts_screen.dart';
 import 'package:skill_share/presentation/widgets/profile_stack_design.dart';
 import 'package:skill_share/presentation/widgets/user_detail_tile.dart';
 
@@ -77,16 +79,12 @@ class _UserProfileTabState extends State<UserProfileTab> {
                 trailingIcon: Icons.chevron_right_outlined,
                 title: 'Saved posts',
                 onPress: () {
-                  // Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  //   return BlocProvider(
-                  //     create: (context) => CommunityPostListBloc(
-                  //       authToken: context.read<AuthCubit>().state.authToken!,
-                  //       dio: Dio(),
-                  //       savedPosts: true,
-                  //     ),
-                  //     child: const CommunityTab(savedPosts: true),
-                  //   );
-                  // }));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return BlocProvider(
+                      create: (context) => SavedPostsBloc(),
+                      child: const SavedPostsScreen(),
+                    );
+                  }));
                 },
               ),
               const Divider(

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:skill_share/blocs/saved_posts/saved_posts_bloc.dart';
+import 'package:skill_share/presentation/widgets/list_post_card.dart';
 
 class SavedPostsScreen extends StatelessWidget {
   const SavedPostsScreen({super.key});
@@ -21,9 +24,25 @@ class SavedPostsScreen extends StatelessWidget {
               ),
         ),
       ),
-      body: const Center(
-        child: Text('No saved posts'),
-      ),
+      body: BlocBuilder<SavedPostsBloc, SavedPostsState>(
+        builder: (context, state) {
+          if (state is SavedPostsInitial || state is SavedPostsLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (state is SavedPostsLoaded) {
+            return ListView.builder(
+              itemCount: state.posts.length,
+              itemBuilder: (context, index) {
+                return ListPostCard(post: state.posts[index], showJoinedButton: true);
+              },
+            );
+          } else{
+            return Center(
+              child: Text((state as SavedPostsError).message),
+            );}
+        },
+      )
     );
   }
 }
