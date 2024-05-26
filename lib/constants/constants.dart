@@ -20,6 +20,7 @@ class PostApiConstants {
   static const String listCreatePost = "${ApiConstants.baseUrl}post/";
   static const String savePost = "${ApiConstants.baseUrl}post/save/";
   static const String votePost = "${ApiConstants.baseUrl}post/vote/";
+  static const String savedPosts = "${ApiConstants.baseUrl}post/saved/";
 }
 
 class SkillApiConstants {
