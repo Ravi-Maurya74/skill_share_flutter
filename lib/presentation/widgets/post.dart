@@ -19,6 +19,7 @@ class Post extends StatelessWidget {
         if (state is DetailPostLoading || state is DetailPostInitial) {
           return const PostLoading();
         } else if (state is DetailPostLoaded) {
+          final post = state.post;
           return Column(
             children: [
               Container(
@@ -52,6 +53,7 @@ class Post extends StatelessWidget {
                       subtitle: Text(state.post.community),
                       trailing: showJoinedButton ? const JoinButton() : null,
                       // onTap: () {
+                      // TODO
                       //   Navigator.of(context).push(MaterialPageRoute(
                       //       builder: (context) => BlocProvider<DetailPostBloc>(
                       //             create: (context) => DetailPostBloc(post.id.toString()),
@@ -85,7 +87,17 @@ class Post extends StatelessWidget {
                     Row(
                       children: [
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            if (post.vote != null && post.vote == 1) {
+                              context
+                                  .read<DetailPostBloc>()
+                                  .add(const RemoveVoteDetailPost());
+                            } else {
+                              context
+                                  .read<DetailPostBloc>()
+                                  .add(const VoteDetailPost(1));
+                            }
+                          },
                           child: Container(
                             margin: const EdgeInsets.fromLTRB(0, 6, 4, 6),
                             padding: const EdgeInsets.symmetric(
@@ -99,18 +111,28 @@ class Post extends StatelessWidget {
                             ),
                             child: Row(
                               children: [
-                                const Icon(
-                                  Icons.arrow_upward_rounded,
-                                  size: 16,
-                                  color: Color.fromARGB(255, 208, 207, 207),
-                                ),
+                                Icon(Icons.arrow_upward_rounded,
+                                    size: 16,
+                                    color: (post.vote != null && post.vote == 1)
+                                        ? Color.fromARGB(255, 177, 52, 52)
+                                        : Color.fromARGB(255, 230, 229, 229)),
                                 Text(' ${state.post.upvotes.toString()} '),
                               ],
                             ),
                           ),
                         ),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            if (post.vote != null && post.vote == -1) {
+                              context
+                                  .read<DetailPostBloc>()
+                                  .add(const RemoveVoteDetailPost());
+                            } else {
+                              context
+                                  .read<DetailPostBloc>()
+                                  .add(const VoteDetailPost(-1));
+                            }
+                          },
                           child: Container(
                             margin: const EdgeInsets.fromLTRB(0, 6, 4, 6),
                             padding: const EdgeInsets.symmetric(
@@ -124,11 +146,12 @@ class Post extends StatelessWidget {
                             ),
                             child: Row(
                               children: [
-                                const Icon(
-                                  Icons.arrow_downward_rounded,
-                                  size: 16,
-                                  color: Color.fromARGB(255, 208, 207, 207),
-                                ),
+                                Icon(Icons.arrow_downward_rounded,
+                                    size: 16,
+                                    color: (post.vote != null &&
+                                            post.vote == -1)
+                                        ? Color.fromARGB(255, 177, 52, 52)
+                                        : Color.fromARGB(255, 230, 229, 229)),
                                 Text(' ${state.post.downvotes.toString()} '),
                               ],
                             ),
@@ -162,9 +185,17 @@ class Post extends StatelessWidget {
                         const Spacer(),
                         IconButton(
                           visualDensity: VisualDensity.compact,
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.bookmark_border,
+                          onPressed: () {
+                            context.read<DetailPostBloc>().add(
+                                SaveDetailPost(save: !state.post.is_saved));
+                          },
+                          icon: Icon(
+                            (context.read<DetailPostBloc>().state
+                                        as DetailPostLoaded)
+                                    .post
+                                    .is_saved
+                                ? Icons.bookmark
+                                : Icons.bookmark_border,
                             color: Color.fromARGB(255, 230, 229, 229),
                           ),
                         ),
@@ -186,7 +217,12 @@ class Post extends StatelessWidget {
             ],
           );
         } else {
-          return const Center(child: Text('An error occurred'));
+          return Center(
+              child: Text(
+            (context.read<DetailPostBloc>().state as DetailPostError)
+                .message
+                .toString(),
+          ));
         }
       },
     );
