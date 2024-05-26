@@ -12,21 +12,24 @@ class SessionScreen extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Sessions'),
         ),
-        body: Column(
-          children: [
-            Text(session.description),
-            Text(session.time),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            VideoCallScreen(channelName: session.channel_id),
-                      ));
-                },
-                child: const Text('Join Session'))
-          ],
+        body: Center(
+          child: Column(
+            children: [
+              Text(session.description,
+                  style: Theme.of(context).textTheme.titleMedium!),
+              Text(session.time),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              VideoCallScreen(channelName: session.channel_id),
+                        ));
+                  },
+                  child: const Text('Join Session'))
+            ],
+          ),
         ));
   }
 }

@@ -78,7 +78,7 @@ class CommunitySpecificScreen extends StatelessWidget {
                   width: 60.0,
                   height: 60.0,
                   child: CircleAvatar(
-                    backgroundImage: NetworkImage(community.banner),
+                    backgroundImage: NetworkImage(community.profile_image),
                   ),
                 ),
                 title: Text(

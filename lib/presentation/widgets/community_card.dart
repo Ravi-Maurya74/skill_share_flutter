@@ -19,8 +19,8 @@ class CommunityCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16.0),
       ),
       child: ListTile(
-        leading: const CircleAvatar(
-          backgroundImage: AssetImage('images/Meeting2.png'),
+        leading: CircleAvatar(
+          backgroundImage: NetworkImage(community.profile_image),
         ),
         title: Text(
           community.name,
