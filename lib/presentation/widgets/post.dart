@@ -50,8 +50,8 @@ class Post extends StatelessWidget {
                         ],
                       ),
                       // Text(post.user.name),
-                      subtitle: Text(state.post.community),
-                      trailing: showJoinedButton ? const JoinButton() : null,
+                      subtitle: Text(state.post.community.name),
+                      trailing: (showJoinedButton && !post.community.is_member) ? const JoinButton() : null,
                       // onTap: () {
                       // TODO
                       //   Navigator.of(context).push(MaterialPageRoute(

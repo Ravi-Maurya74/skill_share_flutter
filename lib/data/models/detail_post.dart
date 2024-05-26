@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:skill_share/data/models/community.dart';
 import 'package:skill_share/data/models/user.dart';
 
 class DetailPost {
@@ -15,7 +16,7 @@ class DetailPost {
   final String? image;
   final String created_at;
   final String updated_at;
-  final String community;
+  final Community community;
   DetailPost({
     required this.id,
     required this.user,
@@ -45,7 +46,7 @@ class DetailPost {
     String? image,
     String? created_at,
     String? updated_at,
-    String? community,
+    Community? community,
   }) {
     return DetailPost(
       id: id ?? this.id,
@@ -96,7 +97,7 @@ class DetailPost {
       image: map['image'] as String?,
       created_at: map['created_at'] as String,
       updated_at: map['updated_at'] as String,
-      community: map['community'] as String,
+      community: Community.fromMap(map['community'] as Map<String, dynamic>),
     );
   }
 
