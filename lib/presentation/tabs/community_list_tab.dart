@@ -16,6 +16,13 @@ class CommunityListTab extends StatefulWidget {
 
 class _CommunityListTabState extends State<CommunityListTab> {
   Key key = UniqueKey();
+
+  void refresh() {
+    setState(() {
+      key = UniqueKey();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,61 +67,62 @@ class _CommunityListTabState extends State<CommunityListTab> {
         actions: [
           IconButton(
             onPressed: () {
-              setState(() {
-                key = UniqueKey();
-              });
+              refresh();
             },
             icon: const Icon(Icons.refresh),
           ),
         ],
       ),
-      body: BlocBuilder<CommunityListBloc, CommunityListState>(
-        key: key,
-          bloc: CommunityListBloc(),
-          builder: (context, state) {
-            if (state is CommunityListLoading ||
-                state is CommunityListInitial) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (state is CommunityListLoaded) {
-              return Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    TextField(
-                      decoration: kSearchTextFeild.copyWith(
-                        hintText: 'Search Communities',
-                        prefixIcon: const Icon(
-                          Icons.search,
-                          color: Color.fromARGB(255, 186, 186, 186),
+      body: BlocProvider(
+        create: (context) => CommunityListBloc(),
+        child: BlocBuilder<CommunityListBloc, CommunityListState>(
+            key: key,
+            builder: (context, state) {
+              if (state is CommunityListLoading ||
+                  state is CommunityListInitial) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (state is CommunityListLoaded) {
+                return Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      TextField(
+                        decoration: kSearchTextFeild.copyWith(
+                          hintText: 'Search Communities',
+                          prefixIcon: const Icon(
+                            Icons.search,
+                            color: Color.fromARGB(255, 186, 186, 186),
+                          ),
+                        ),
+                        onChanged: (value) {},
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: state.communities.length,
+                          itemBuilder: (context, index) {
+                            return CommunityCard(
+                              community: state.communities[index],
+                              index: index,
+                            );
+                          },
                         ),
                       ),
-                      onChanged: (value) {},
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: state.communities.length,
-                        itemBuilder: (context, index) {
-                          return CommunityCard(
-                            community: state.communities[index],
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            } else {
-              print((state as CommunityListError).message);
-              return const Center(child: Text('An error occurred'));
-            }
-          }),
+                    ],
+                  ),
+                );
+              } else {
+                print((state as CommunityListError).message);
+                return const Center(child: Text('An error occurred'));
+              }
+            }),
+      ),
     );
   }
 }

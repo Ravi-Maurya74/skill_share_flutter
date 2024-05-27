@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:skill_share/blocs/community_list/community_list_bloc.dart';
 import 'package:skill_share/data/models/community.dart';
 import 'package:skill_share/presentation/screens/community_specific_screen.dart';
 import 'package:skill_share/presentation/widgets/join_button.dart';
 
 class CommunityCard extends StatelessWidget {
   final Community community;
-  const CommunityCard({required this.community, super.key});
+  final int index;
+  const CommunityCard({required this.community, super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +34,12 @@ class CommunityCard extends StatelessWidget {
         ),
         subtitle: Text(
             '${community.skill.name} • ${community.members.length} members'),
-        trailing: community.is_member ? null : const JoinButton(),
+        trailing: community.is_member ? null : JoinButton(
+          onPressed: () {
+            BlocProvider.of<CommunityListBloc>(context)
+                .add(AddUserToCommunity(index));
+          },
+        ),
         onTap: () {
           Navigator.push(
               context,

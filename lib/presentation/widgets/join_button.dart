@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 
 class JoinButton extends StatelessWidget {
+  final Function()? onPressed;
   const JoinButton({
-    super.key,
+    super.key, this.onPressed,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        // Add your logic here
-      },
+      onTap: onPressed,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
         decoration: BoxDecoration(

@@ -11,6 +11,7 @@ part 'community_list_state.dart';
 class CommunityListBloc extends Bloc<CommunityListEvent, CommunityListState> {
   CommunityListBloc() : super(CommunityListInitial()) {
     on<FetchCommunityList>(_onFetchCommunityList);
+    on<AddUserToCommunity>(_onAddMemberToCommunity);
     add(FetchCommunityList());
   }
   void _onFetchCommunityList(
@@ -33,6 +34,32 @@ class CommunityListBloc extends Bloc<CommunityListEvent, CommunityListState> {
       emit(CommunityListLoaded(communities));
     } catch (error) {
       emit(CommunityListError(error.toString()));
+    }
+  }
+
+  void _onAddMemberToCommunity(
+      AddUserToCommunity event, Emitter<CommunityListState> emit) async {
+        Community currentCommunity = (state as CommunityListLoaded).communities[event.index];
+        List<Community> currentCommunities = (state as CommunityListLoaded).communities;
+        List<Community> updatedCommunities = List.from(currentCommunities);
+        updatedCommunities[event.index] = currentCommunity.copyWith(is_member: true);
+        emit(CommunityListLoaded(updatedCommunities));
+    try {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      String idToken = prefs.getString('idToken')!;
+      await Dio().post(
+        CommunityApiConstants.member,
+        options: Options(
+          headers: {
+            'Authorization': 'Token $idToken',
+          },
+        ),
+        data: {
+          'community': currentCommunity.name,
+        },
+      );
+    } catch (error) {
+      emit(CommunityListLoaded(currentCommunities));
     }
   }
 }
