@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:skill_share/blocs/detail_post/detail_post_bloc.dart';
+import 'package:skill_share/presentation/widgets/comments.dart';
 import 'package:skill_share/presentation/widgets/post.dart';
 
 class PostDetailScreen extends StatelessWidget {
@@ -26,13 +29,21 @@ class PostDetailScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(
-              parent: AlwaysScrollableScrollPhysics()),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Post(showJoinedButton: showJoinedButton),
+              BlocBuilder<DetailPostBloc, DetailPostState>(
+                builder: (context, state) {
+                  if (state is DetailPostLoaded) {
+                    return Comments(
+                      post: state.post.id,
+                    );
+                  }
+                  return const SizedBox();
+                },
+              ),
             ],
           ),
         ),

@@ -84,13 +84,13 @@ class Comment {
       upvotes: map['upvotes'].toInt() as int,
       downvotes: map['downvotes'].toInt() as int,
       score: map['score'].toInt() as int,
-      vote: map['vote'].toInt() as int?,
+      vote: map['vote'] as int?,
       content: map['content'] as String,
       created_at: map['created_at'] as String,
       updated_at: map['updated_at'] as String,
       depth: map['depth'].toInt() as int,
       post: map['post'].toInt() as int,
-      parent: map['parent'].toInt() as int?,
+      parent: map['parent'] as int?,
     );
   }
 
