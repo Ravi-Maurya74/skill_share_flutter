@@ -2,6 +2,7 @@ import 'dart:convert';
 
 class ListSession {
   final int id;
+  final double rating;
   final String channel_id;
   final String time;
   final String description;
@@ -9,6 +10,7 @@ class ListSession {
   final String community;
   ListSession({
     required this.id,
+    required this.rating,
     required this.channel_id,
     required this.time,
     required this.description,
@@ -18,6 +20,7 @@ class ListSession {
 
   ListSession copyWith({
     int? id,
+    double? rating,
     String? channel_id,
     String? time,
     String? description,
@@ -26,6 +29,7 @@ class ListSession {
   }) {
     return ListSession(
       id: id ?? this.id,
+      rating: rating ?? this.rating,
       channel_id: channel_id ?? this.channel_id,
       time: time ?? this.time,
       description: description ?? this.description,
@@ -37,6 +41,7 @@ class ListSession {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
+      'rating': rating,
       'channel_id': channel_id,
       'time': time,
       'description': description,
@@ -48,6 +53,7 @@ class ListSession {
   factory ListSession.fromMap(Map<String, dynamic> map) {
     return ListSession(
       id: map['id'].toInt() as int,
+      rating: map['rating']==null? 0: map['rating'].toDouble() as double,
       channel_id: map['channel_id'] as String,
       time: map['time'] as String,
       description: map['description'] as String,
@@ -62,7 +68,7 @@ class ListSession {
 
   @override
   String toString() {
-    return 'ListSession(id: $id, channel_id: $channel_id, time: $time, description: $description, duration: $duration, community: $community)';
+    return 'ListSession(id: $id, rating: $rating, channel_id: $channel_id, time: $time, description: $description, duration: $duration, community: $community)';
   }
 
   @override
@@ -71,6 +77,7 @@ class ListSession {
   
     return 
       other.id == id &&
+      other.rating == rating &&
       other.channel_id == channel_id &&
       other.time == time &&
       other.description == description &&
@@ -81,6 +88,7 @@ class ListSession {
   @override
   int get hashCode {
     return id.hashCode ^
+      rating.hashCode ^
       channel_id.hashCode ^
       time.hashCode ^
       description.hashCode ^

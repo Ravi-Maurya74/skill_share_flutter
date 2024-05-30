@@ -20,10 +20,18 @@ class SessionListBuilder extends StatelessWidget {
           if (state is ListSessionLoading || state is ListSessionInitial) {
             return const Center(child: CircularProgressIndicator());
           } else if (state is ListSessionLoaded) {
-            return ListView.builder(
-                itemCount: state.sessions.length,
-                itemBuilder: (context, index) =>
-                    SingleListSessionWidget(session: state.sessions[index]));
+            return Column(
+              children: [
+                ElevatedButton(
+                    onPressed: () {}, child: const Text('Create Session')),
+                Expanded(
+                  child: ListView.builder(
+                      itemCount: state.sessions.length,
+                      itemBuilder: (context, index) => SingleListSessionWidget(
+                          session: state.sessions[index])),
+                ),
+              ],
+            );
           } else {
             print((state as ListSessionError).message);
             return const Center(child: Text('An error occurred'));
@@ -124,7 +132,7 @@ class SingleListSessionWidget extends StatelessWidget {
         trailing: isSessionActiveOrUpcoming(session.time, session.duration)
             ? const Text('')
             : RatingBar.builder(
-                initialRating: randomNumber.toDouble(),
+                initialRating: session.rating/2,
                 minRating: 1,
                 direction: Axis.horizontal,
                 allowHalfRating: true,

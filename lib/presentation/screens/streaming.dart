@@ -30,7 +30,7 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
   Future<String?> getToken(
       {required String uid, required String channelName}) async {
     Response response = await Dio().post(
-      'https://agora-token-service-production-f878.up.railway.app/getToken',
+      'https://agora-token-service-production-930b.up.railway.app/getToken',
       data: {
         "tokenType": "rtc", // choose rtc for audio/video SDK tokens
         "role": "subscriber", // "publisher" or "subscriber"
@@ -45,6 +45,7 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
         followRedirects: true,
       ),
     );
+    // print(response.data);
     return response.data['token'] as String?;
   }
 

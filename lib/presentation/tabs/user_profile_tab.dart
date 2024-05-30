@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skill_share/blocs/authentication/authentication_bloc.dart';
 import 'package:skill_share/blocs/saved_posts/saved_posts_bloc.dart';
+import 'package:skill_share/blocs/user_posts_bloc/user_posts_bloc.dart';
 import 'package:skill_share/data/models/user.dart';
 import 'package:skill_share/presentation/screens/saved_posts_screen.dart';
+import 'package:skill_share/presentation/screens/user_posts_screen.dart';
 import 'package:skill_share/presentation/widgets/profile_stack_design.dart';
 import 'package:skill_share/presentation/widgets/user_detail_tile.dart';
 
@@ -133,16 +135,12 @@ class _UserProfileTabState extends State<UserProfileTab> {
                 trailingIcon: Icons.chevron_right_outlined,
                 title: 'My posts',
                 onPress: () {
-                  // Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  //   return BlocProvider(
-                  //     create: (context) => CommunityPostListBloc(
-                  //       authToken: context.read<AuthCubit>().state.authToken!,
-                  //       dio: Dio(),
-                  //       myPosts: true,
-                  //     ),
-                  //     child: const CommunityTab(myPosts: true),
-                  //   );
-                  // }));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return BlocProvider(
+                      create: (context) => UserPostsBloc(),
+                      child: const UserPostsScreen(),
+                    );
+                  }));
                 },
               ),
               const Divider(
