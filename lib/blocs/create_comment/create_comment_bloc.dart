@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
@@ -32,6 +34,9 @@ class CreateCommentBloc extends Bloc<CreateCommentEvent, CreateCommentState> {
       );
       final Comment comment = Comment.fromMap(response.data);
       emit(CreateCommentSuccess(comment));
+      if (event.onCreateComment != null) {
+        event.onCreateComment!();
+      }
     } catch (e) {
       emit(const CreateCommentFailure('Failed to create comment'));
     }

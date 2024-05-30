@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skill_share/blocs/detail_post/detail_post_bloc.dart';
+import 'package:skill_share/presentation/widgets/create_comment.dart';
 import 'package:skill_share/presentation/widgets/join_button.dart';
 import 'package:skill_share/presentation/widgets/post_loading.dart';
 
@@ -51,7 +52,9 @@ class Post extends StatelessWidget {
                       ),
                       // Text(post.user.name),
                       subtitle: Text(state.post.community.name),
-                      trailing: (showJoinedButton && !post.community.is_member) ? const JoinButton() : null,
+                      trailing: (showJoinedButton && !post.community.is_member)
+                          ? const JoinButton()
+                          : null,
                       // onTap: () {
                       // TODO
                       //   Navigator.of(context).push(MaterialPageRoute(
@@ -157,31 +160,7 @@ class Post extends StatelessWidget {
                             ),
                           ),
                         ),
-                        GestureDetector(
-                          onTap: () {},
-                          child: Container(
-                            margin: const EdgeInsets.fromLTRB(0, 6, 4, 6),
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 6, vertical: 4),
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: const Color(0xFF272727),
-                                width: 1.5,
-                              ),
-                              borderRadius: BorderRadius.circular(22.0),
-                            ),
-                            child: const Row(
-                              children: [
-                                Icon(
-                                  Icons.forum_rounded,
-                                  size: 16,
-                                  color: Color.fromARGB(255, 208, 207, 207),
-                                ),
-                                Text(' Comments '),
-                              ],
-                            ),
-                          ),
-                        ),
+                        CreateCommentWidget(post: post.id),
                         const Spacer(),
                         IconButton(
                           visualDensity: VisualDensity.compact,

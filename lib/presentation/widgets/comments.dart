@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skill_share/blocs/comments_bloc/comments_bloc.dart';
 import 'package:skill_share/constants/decoration.dart';
 import 'package:skill_share/data/models/comment.dart';
+import 'package:skill_share/presentation/widgets/create_comment.dart';
 import 'package:skill_share/presentation/widgets/user_profile_pic.dart';
 
 class Comments extends StatelessWidget {
@@ -108,15 +109,15 @@ class _CommentWidgetState extends State<CommentWidget> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    // CreateCommentWidget(
-                    //   postId: widget.comment.post,
-                    //   commentId: widget.comment.id,
-                    //   onCreateComment: () {
-                    //     setState(() {
-                    //       showComments = false;
-                    //     });
-                    //   },
-                    // ),
+                    CreateCommentWidget(
+                      post: widget.comment.post,
+                      parent: widget.comment.id,
+                      onCreateComment: () {
+                        setState(() {
+                          showComments = false;
+                        });
+                      },
+                    ),
                     // TODO
                     // Text('reply',style: Theme.of(context).textTheme.bodySmall,),
                     // BlocProvider(
