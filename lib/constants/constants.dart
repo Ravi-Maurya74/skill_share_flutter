@@ -22,7 +22,8 @@ class PostApiConstants {
   static const String savePost = "${ApiConstants.baseUrl}post/save/";
   static const String votePost = "${ApiConstants.baseUrl}post/vote/";
   static const String savedPosts = "${ApiConstants.baseUrl}post/saved/";
-  static const String comments = "${ApiConstants.baseUrl}post/comments/";
+  static const String listCreateComments =
+      "${ApiConstants.baseUrl}post/comments/";
 }
 
 class SkillApiConstants {
@@ -31,5 +32,6 @@ class SkillApiConstants {
 }
 
 class SessionApiConstants {
-  static const String listCreateSession = "${ApiConstants.baseUrl}/community/sessions/";
+  static const String listCreateSession =
+      "${ApiConstants.baseUrl}/community/sessions/";
 }

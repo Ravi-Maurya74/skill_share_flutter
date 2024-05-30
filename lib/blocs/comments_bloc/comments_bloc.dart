@@ -16,13 +16,14 @@ class CommentsBloc extends Bloc<CommentsEvent, CommentsState> {
   final int post;
   final int? parent;
 
-  Future<void> _onFetchComments(CommentsFetch event, Emitter<CommentsState> emit) async {
+  Future<void> _onFetchComments(
+      CommentsFetch event, Emitter<CommentsState> emit) async {
     emit(CommentsLoading());
     try {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       String idToken = prefs.getString('idToken')!;
       Response response = await Dio().get(
-        PostApiConstants.comments,
+        PostApiConstants.listCreateComments,
         options: Options(
           headers: {
             'Authorization': 'Token $idToken',
@@ -30,8 +31,7 @@ class CommentsBloc extends Bloc<CommentsEvent, CommentsState> {
         ),
         queryParameters: {
           'post': event.post,
-          if(event.parent != null)
-          'parent': event.parent,
+          if (event.parent != null) 'parent': event.parent,
         },
       );
       List<Comment> comments = (response.data as List)
