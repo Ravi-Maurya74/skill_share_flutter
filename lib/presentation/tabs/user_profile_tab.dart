@@ -92,41 +92,41 @@ class _UserProfileTabState extends State<UserProfileTab> {
                 indent: 20,
                 endIndent: 20,
               ),
-              UserdetailTile(
-                Icons.account_balance_outlined,
-                titleDescription: 'See your monthly savings',
-                trailingIcon: Icons.chevron_right_outlined,
-                title: 'Savings',
-                onPress: () {
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: ((context) => const SavingsScreen())));
-                },
-              ),
-              const Divider(
-                thickness: 0.5,
-                indent: 20,
-                endIndent: 20,
-              ),
-              UserdetailTile(Icons.receipt_outlined,
-                  title: 'Dues History',
-                  titleDescription: 'View all your cleared dues',
-                  trailingIcon: Icons.chevron_right_outlined, onPress: () {
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //       builder: (_) => ClearedDuesScreen(
-                //         user: context.read<UserBloc>().state.user!,
-                //       ),
-                //     ),
-                //   );
-              }),
-              const Divider(
-                thickness: 0.5,
-                indent: 20,
-                endIndent: 20,
-              ),
+              // UserdetailTile(
+              //   Icons.account_balance_outlined,
+              //   titleDescription: 'See your monthly savings',
+              //   trailingIcon: Icons.chevron_right_outlined,
+              //   title: 'Savings',
+              //   onPress: () {
+              //     // Navigator.push(
+              //     //     context,
+              //     //     MaterialPageRoute(
+              //     //         builder: ((context) => const SavingsScreen())));
+              //   },
+              // ),
+              // const Divider(
+              //   thickness: 0.5,
+              //   indent: 20,
+              //   endIndent: 20,
+              // ),
+              // UserdetailTile(Icons.receipt_outlined,
+              //     title: 'Dues History',
+              //     titleDescription: 'View all your cleared dues',
+              //     trailingIcon: Icons.chevron_right_outlined, onPress: () {
+              //   // Navigator.push(
+              //   //     context,
+              //   //     MaterialPageRoute(
+              //   //       builder: (_) => ClearedDuesScreen(
+              //   //         user: context.read<UserBloc>().state.user!,
+              //   //       ),
+              //   //     ),
+              //   //   );
+              // }),
+              // const Divider(
+              //   thickness: 0.5,
+              //   indent: 20,
+              //   endIndent: 20,
+              // ),
               UserdetailTile(
                 Icons.forum_outlined,
                 titleDescription: 'View all your posts',
