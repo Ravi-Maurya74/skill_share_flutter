@@ -2,7 +2,10 @@ import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skill_share/blocs/all_dms/all_dms_bloc.dart';
+import 'package:skill_share/blocs/authentication/authentication_bloc.dart';
 import 'package:skill_share/blocs/search_user/search_user_bloc.dart';
+import 'package:skill_share/data/models/chat.dart';
+import 'package:skill_share/data/models/user.dart';
 import 'package:skill_share/presentation/screens/chat_screen.dart';
 import 'package:skill_share/presentation/screens/search_user.dart';
 import 'package:skill_share/constants/decoration.dart';
@@ -74,16 +77,19 @@ class DmsTab extends StatelessWidget {
                     child: ListView.builder(
                       itemCount: state.dms.length,
                       itemBuilder: (context, index) {
+                        final Chat chat = state.dms[index];
+                        final User currentUser = (context.read<AuthenticationBloc>().state as Authenticated).user;
+                        final User otherParticipant = getOtherParticipant(chat.participants, currentUser);
                         return ListTile(
                           contentPadding:
                               const EdgeInsets.fromLTRB(0, 0, 10, 0),
                           leading: CircleAvatar(
                             backgroundImage: NetworkImage(
-                                state.dms[index].participants[0].picture),
+                                otherParticipant.picture),
                           ),
-                          title: Text(state.dms[index].participants[0].name),
+                          title: Text(otherParticipant.name),
                           subtitle:
-                              Text(state.dms[index].participants[0].email),
+                              Text(otherParticipant.email),
                           trailing: Container(
                             width: 10.0,
                             height: 10.0,

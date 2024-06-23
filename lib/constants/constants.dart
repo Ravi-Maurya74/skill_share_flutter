@@ -36,3 +36,8 @@ class SessionApiConstants {
   static const String listCreateSession =
       "${ApiConstants.baseUrl}community/sessions/";
 }
+
+class FeedbackApiConstants {
+  static const String listCreateFeedback =
+      "${ApiConstants.baseUrl}community/feedback/";
+}

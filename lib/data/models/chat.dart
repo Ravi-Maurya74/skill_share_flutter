@@ -85,6 +85,10 @@ class Chat {
   }
 }
 
+User getOtherParticipant(List<User> participants, User currentUser) {
+  return participants.firstWhere((element) => element.uid != currentUser.uid);
+}
+
 // class Participant {
 //   final String uid;
 //   final String name;

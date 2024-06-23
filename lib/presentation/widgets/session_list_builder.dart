@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:skill_share/blocs/create_session_bloc/create_session_bloc.dart';
 import 'package:skill_share/blocs/list_session/list_session_bloc.dart';
 import 'package:skill_share/data/models/community.dart';
 import 'package:skill_share/data/models/list_session.dart';
@@ -7,6 +8,8 @@ import 'package:skill_share/presentation/screens/SessionScreen.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'dart:math';
+
+import 'package:skill_share/presentation/screens/create_new_session_screen.dart';
 
 class SessionListBuilder extends StatelessWidget {
   const SessionListBuilder({super.key, required this.community});
@@ -23,7 +26,18 @@ class SessionListBuilder extends StatelessWidget {
             return Column(
               children: [
                 ElevatedButton(
-                    onPressed: () {}, child: const Text('Create Session')),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BlocProvider(
+                              create: (context) => CreateSessionBloc(),
+                              child: CreateSessionScreen(
+                                  communityName: community.name),
+                            ),
+                          ));
+                    },
+                    child: const Text('Create Session')),
                 Expanded(
                   child: ListView.builder(
                       itemCount: state.sessions.length,
@@ -132,7 +146,7 @@ class SingleListSessionWidget extends StatelessWidget {
         trailing: isSessionActiveOrUpcoming(session.time, session.duration)
             ? const Text('')
             : RatingBar.builder(
-                initialRating: session.rating/2,
+                initialRating: session.rating / 2,
                 minRating: 1,
                 direction: Axis.horizontal,
                 allowHalfRating: true,
